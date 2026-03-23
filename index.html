@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Mobile Robots - Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        :root {
+            --cream: #f2ede4;
+            --white: #ffffff;
+            --green: #7eb896;
+            --green-light: #d6ead9;
+            --yellow: #e8d478;
+            --yellow-light: #f5edba;
+            --dark: #1a1a1a;
+            --mid: #555;
+            --border: #e0d8cc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            line-height: 1.65;
+        }
+
+        /* ── NAV ── */
+        header {
+            background: var(--cream);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--mid);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--dark); }
+
+        .nav-pill {
+            padding: 8px 20px;
+            background: var(--dark);
+            color: white;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .nav-pill:hover { opacity: 0.8; }
+
+        /* ── HERO ── */
+        .hero {
+            background: var(--cream);
+            padding: 70px 2rem 60px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--green-light);
+            color: #3a7a55;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 999px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.3px;
+        }
+
+        .hero h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            color: var(--dark);
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 .outline-word {
+            display: inline-block;
+            border: 2px solid var(--dark);
+            border-radius: 10px;
+            padding: 0 10px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--mid);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 480px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-dark {
+            padding: 11px 26px;
+            background: var(--dark);
+            color: white;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .btn-dark:hover { opacity: 0.8; }
+
+        .btn-outline {
+            padding: 11px 26px;
+            background: transparent;
+            color: var(--dark);
+            border: 1.5px solid var(--dark);
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-outline:hover { background: rgba(0,0,0,0.05); }
+
+        .hero-visual-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        /* ── MAIN ── */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 70px 2rem;
+        }
+
+        /* section label style */
+        .sec-label {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 0.6rem;
+        }
+
+        .sec-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--dark);
+            margin-bottom: 1.8rem;
+        }
+
+        /* ── WHAT IS AMR ── */
+        .what-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+
+        .what-grid p {
+            font-size: 0.88rem;
+            color: var(--mid);
+            line-height: 1.85;
+            margin-bottom: 1rem;
+        }
+
+        .what-grid img {
+            width: 100%;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+        }
+
+        .btn-green {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 10px 22px;
+            background: var(--green);
+            color: white;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .btn-green:hover { opacity: 0.85; }
+
+        /* ── HOW DO AMRS OPERATE ── */
+        .operate-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+
+        .operate-list {
+            flex: 1;
+            list-style: none;
+        }
+
+        .operate-list li {
+            display: flex;
+            gap: 1rem;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid #f0ece4;
+            font-size: 0.85rem;
+            color: var(--mid);
+            line-height: 1.75;
+        }
+
+        .operate-list li:last-child { border-bottom: none; }
+
+        .operate-list li .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--green);
+            flex-shrink: 0;
+            padding-top: 2px;
+        }
+
+        .operate-img {
+            width: 240px;
+            align-self: stretch;
+            object-fit: cover;
+            border-radius: 14px;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        /* ── KEY CAPABILITIES ── */
+        .caps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin-bottom: 5rem;
+        }
+
+        .cap-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.6rem;
+            transition: box-shadow 0.25s, transform 0.25s;
+        }
+
+        .cap-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.07);
+        }
+
+        .cap-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--green);
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+        }
+
+        .cap-card h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .cap-card p {
+            font-size: 0.82rem;
+            color: var(--mid);
+            line-height: 1.7;
+        }
+
+        /* ── APPLICATIONS ── */
+        .app-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.6rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            transition: box-shadow 0.25s, transform 0.25s;
+        }
+
+        .app-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.07);
+        }
+
+        .app-card img {
+            width: 190px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 12px;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .app-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 3px 12px;
+            border-radius: 999px;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-agri { background: var(--green-light); color: #3a7a55; }
+        .badge-health { background: #d6eaff; color: #2a5ea0; }
+        .badge-facility { background: var(--yellow-light); color: #7a6010; }
+
+        .app-card h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .app-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .app-card ul li {
+            font-size: 0.82rem;
+            color: var(--mid);
+            line-height: 1.7;
+            padding: 0.15rem 0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .app-card ul li::before {
+            content: "→";
+            color: var(--green);
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            padding-top: 2px;
+        }
+
+        /* ── INDUSTRIAL IMPACT ── */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-bottom: 5rem;
+        }
+
+        .impact-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.8rem;
+        }
+
+        .impact-card.yellow { background: var(--yellow-light); border-color: #d4c45a; }
+        .impact-card.green  { background: var(--green-light);  border-color: #9ec9a8; }
+
+        .impact-card .icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .impact-card h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .impact-card p {
+            font-size: 0.82rem;
+            color: var(--mid);
+            line-height: 1.7;
+        }
+
+        .impact-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        /* ── PROS CONS ── */
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .pros-box, .cons-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 2rem;
+        }
+
+        .pros-box { border-top: 4px solid var(--green); }
+        .cons-box { border-top: 4px solid #d9534f; }
+
+        .pros-box h3, .cons-box h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+        }
+
+        .pros-box h3 { color: #3a7a55; }
+        .cons-box h3 { color: #c0392b; }
+
+        .pros-box ul, .cons-box ul { list-style: none; }
+
+        .pros-box li, .cons-box li {
+            font-size: 0.84rem;
+            color: var(--mid);
+            padding: 0.65rem 0;
+            border-bottom: 1px solid #f0ece4;
+            display: flex;
+            gap: 0.7rem;
+        }
+
+        .pros-box li:last-child, .cons-box li:last-child { border-bottom: none; }
+
+        .pros-box li::before { content: "✓"; color: var(--green); font-weight: 700; flex-shrink: 0; }
+        .cons-box li::before { content: "✕"; color: #d9534f; font-weight: 700; flex-shrink: 0; }
+
+        /* ── CHALLENGES & FUTURE ── */
+        .challenge-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .challenge-box h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.6rem;
+        }
+
+        .challenge-box p {
+            font-size: 0.85rem;
+            color: var(--mid);
+            line-height: 1.8;
+        }
+
+        .emerging-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .emerging-list li {
+            font-size: 0.84rem;
+            color: var(--mid);
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0ece4;
+            display: flex;
+            gap: 0.7rem;
+        }
+
+        .emerging-list li:last-child { border-bottom: none; }
+        .emerging-list li::before { content: "→"; color: var(--green); flex-shrink: 0; }
+
+        .quote-box {
+            background: var(--cream);
+            border-left: 4px solid var(--green);
+            border-radius: 8px;
+            padding: 1.4rem 1.6rem;
+            margin-top: 1.2rem;
+            font-size: 0.84rem;
+            color: #444;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .quote-box cite {
+            display: block;
+            font-style: normal;
+            color: #999;
+            font-size: 0.78rem;
+            margin-top: 0.6rem;
+        }
+
+        /* ── CONCLUSION ── */
+        .conclusion {
+            background: var(--dark);
+            color: white;
+            border-radius: 22px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .conclusion h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
+        }
+
+        .conclusion p {
+            font-size: 0.88rem;
+            opacity: 0.75;
+            margin-bottom: 1.8rem;
+        }
+
+        .btn-cream {
+            display: inline-block;
+            padding: 12px 32px;
+            background: var(--cream);
+            color: var(--dark);
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 700;
+            transition: opacity 0.2s;
+        }
+
+        .btn-cream:hover { opacity: 0.85; }
+
+        /* ── VIDEO ── */
+        .video-wrap {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .video-wrap h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-wrap p {
+            font-size: 0.85rem;
+            color: var(--mid);
+            margin-bottom: 1.8rem;
+        }
+
+        .video-thumb-link {
+            display: block;
+            position: relative;
+            max-width: 680px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .video-thumb-link:hover { transform: scale(1.015); }
+
+        .video-thumb-link img { width: 100%; display: block; }
+
+        .play-btn {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px; height: 70px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+        }
+
+        .video-thumb-link:hover .play-btn { transform: translate(-50%, -50%) scale(1.1); }
+
+        .play-btn svg { width: 28px; height: 28px; fill: var(--dark); margin-left: 3px; }
+
+        .video-caption {
+            margin-top: 1rem;
+            font-size: 0.83rem;
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 2rem;
+        }
+
+        footer p {
+            font-size: 0.83rem;
+            opacity: 0.6;
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: white; }
+
+        /* ── SECTION SPACING ── */
+        section { margin-bottom: 5rem; }
+
+        @media (max-width: 768px) {
+            .hero-inner, .what-grid, .impact-grid, .pros-cons-grid { grid-template-columns: 1fr; }
+            .caps-grid { grid-template-columns: 1fr 1fr; }
+            .operate-box, .app-card { flex-direction: column; }
+            .operate-img, .app-card img { width: 100%; height: 180px; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">AMR Blog</a>
+            <ul class="nav-links">
+                <li><a href="#what-is">Overview</a></li>
+                <li><a href="#features">How It Works</a></li>
+                <li><a href="#applications">Applications</a></li>
+                <li><a href="Autonomous%20Mobile%20Robots.pdf">PDF</a></li>
+            </ul>
+            <a href="Autonomous%20Mobile%20Robots.pdf" class="nav-pill">Download PDF</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div>
+                <span class="hero-tag">🤖 BUS 237 — Technology & Innovation</span>
+                <h1>Autonomous<br><span class="outline-word">Mobile</span><br>Robots.</h1>
+                <p>The future of logistics, manufacturing, and beyond. Discover how intelligent mobile systems are transforming industries worldwide.</p>
+                <div class="hero-btns">
+                    <a href="#what-is" class="btn-dark">Learn More →</a>
+                    <p style="font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem; letter-spacing: 0.3px;">Dig Deeper</p>
+                    <a href="Autonomous%20Mobile%20Robots.pdf" class="btn-outline">Download PDF</a>
+                </div>
+            </div>
+            <div class="hero-visual-box">🤖</div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- What Are AMRs -->
+        <section id="what-is">
+            <div class="what-grid">
+                <div>
+                    <span class="sec-label">01 / Overview</span>
+                    <h2 class="sec-title">What are Autonomous Mobile Robots?</h2>
+                    <p>Autonomous Mobile Robots (AMRs) are self-propelled vehicles equipped with advanced sensors, computer vision systems, and artificial intelligence algorithms that enable them to navigate and operate independently without human control.</p>
+                    <p>Unlike traditional robots confined to fixed locations, AMRs can move freely through dynamic environments while avoiding obstacles and optimizing their paths in real-time.</p>
+                    <button class="btn-green">Explore now →</button>
+                </div>
+                <div>
+                    <img src="giphy.gif" alt="Autonomous Mobile Robots in Warehouse">
+                </div>
+            </div>
+        </section>
+
+        <!-- How Do AMRs Operate -->
+        <section id="features">
+            <span class="sec-label">02 / How It Works</span>
+            <h2 class="sec-title">How Do AMRs Operate?</h2>
+            <div class="operate-box">
+                <ul class="operate-list">
+                    <li>
+                        <span class="num">01/</span>
+                        Equipped with advanced sensors (light detection, lidar, cameras, GPS, and machine learning algorithms) to build a real-time 360-degree understanding of their surroundings
+                    </li>
+                    <li>
+                        <span class="num">02/</span>
+                        Process data instantly with onboard computing hardware, enable real-time decisions, and adapt to changes in their surroundings
+                    </li>
+                    <li>
+                        <span class="num">03/</span>
+                        Navigate independently without fixed tracks, adjusting their path automatically to avoid obstacles, and maintain continuous operation
+                    </li>
+                    <li>
+                        <span class="num">04/</span>
+                        Work safely alongside humans, replace repetitive tasks, and shift workers to focus on more strategic tasks
+                    </li>
+                </ul>
+                <img src="amrwarehouse.png" alt="AMR in Warehouse" class="operate-img">
+            </div>
+        </section>
+
+        <!-- Key Capabilities -->
+        <section>
+            <span class="sec-label">03 / Capabilities</span>
+            <h2 class="sec-title">Key Capabilities</h2>
+            <div class="caps-grid">
+                <div class="cap-card">
+                    <div class="cap-num">01/</div>
+                    <h4>Obstacle Avoidance</h4>
+                    <p>Advanced sensors detect and navigate around obstacles in real-time, ensuring safe operation in dynamic environments.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-num">02/</div>
+                    <h4>Multi-Robot Coordination</h4>
+                    <p>Fleet management systems enable seamless cooperation between multiple AMRs for complex tasks and optimization.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-num">03/</div>
+                    <h4>Battery Intelligence</h4>
+                    <p>Smart power management ensures optimal runtime and autonomous return to docking stations.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-num">04/</div>
+                    <h4>Path Optimization</h4>
+                    <p>AI algorithms calculate efficient routes, reducing travel time and energy consumption significantly.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-num">05/</div>
+                    <h4>Real-Time Monitoring</h4>
+                    <p>Cloud dashboards provide complete visibility into robot status, location, and performance metrics.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-num">06/</div>
+                    <h4>Adaptive Learning</h4>
+                    <p>Machine learning models continuously improve navigation and decision-making over time.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Applications -->
+        <section id="applications">
+            <span class="sec-label">04 / Real-World Applications</span>
+            <h2 class="sec-title">Real-World Applications</h2>
+
+            <div class="app-card">
+                <div style="flex:1">
+                    <span class="app-badge badge-agri">Agriculture</span>
+                    <h4>Oz by Naio Technologies</h4>
+                    <ul>
+                        <li>Autonomously weeds rows of crops without damaging plants</li>
+                        <li>Uses precise row navigation</li>
+                        <li>Reduces the need for chemical herbicides</li>
+                        <li>Commonly used in small farms for vegetable crops</li>
+                    </ul>
+                </div>
+                <img src="agriex.png" alt="Oz by Naio Technologies">
+            </div>
+
+            <div class="app-card">
+                <div style="flex:1">
+                    <span class="app-badge badge-health">Healthcare</span>
+                    <h4>Moxi by Diligent Robotics</h4>
+                    <ul>
+                        <li>Transports medication, lab samples, and supplies in hospitals</li>
+                        <li>Uses a robotic arm and sensors for navigation and delivery</li>
+                        <li>Reduces nurse workload</li>
+                        <li>Allows staff to prioritize direct patient care</li>
+                    </ul>
+                </div>
+                <img src="moxi.webp" alt="Moxi by Diligent Robotics">
+            </div>
+
+            <div class="app-card">
+                <div style="flex:1">
+                    <span class="app-badge badge-facility">Facility</span>
+                    <h4>Whiz by SoftBank Robotics</h4>
+                    <ul>
+                        <li>Uses AI-powered navigation to map and clean floors autonomously</li>
+                        <li>Detects obstacles and people for safe operation</li>
+                        <li>Commonly used in airports, hotels, and offices</li>
+                    </ul>
+                </div>
+                <img src="whiz.webp" alt="Whiz by SoftBank Robotics">
+            </div>
+        </section>
+
+        <!-- Industrial Impact -->
+        <section>
+            <span class="sec-label">05 / Industrial Impact</span>
+            <h2 class="sec-title">Industrial Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-card yellow">
+                    <span class="icon">🏭</span>
+                    <h4>Transition from Manual Labour</h4>
+                    <p>Factories are transitioning from manual labour to automated robots, revolutionizing production processes.</p>
+                </div>
+                <div class="impact-card">
+                    <span class="icon">⚙️</span>
+                    <h4>Peak Efficiency & Accuracy</h4>
+                    <p>Manufacturers prefer AMRs to run at peak efficiency and accuracy, maximizing output and quality control.</p>
+                </div>
+                <div class="impact-card green">
+                    <span class="icon">💰</span>
+                    <h4>Cost & Time Savings</h4>
+                    <p>AMRs reduce labour costs by 40% and shorten construction time by 25%, providing significant financial returns.</p>
+                </div>
+                <div class="impact-card">
+                    <span class="icon">🔄</span>
+                    <h4>Operational Transformation</h4>
+                    <p>Businesses are transitioning from rigid, manual operations to flexible, efficient solutions enabled by AMR technology.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advantages & Challenges -->
+        <section>
+            <span class="sec-label">06 / Advantages & Challenges</span>
+            <h2 class="sec-title">Advantages & Challenges</h2>
+            <div class="pros-cons-grid">
+                <div class="pros-box">
+                    <h3>✓ Advantages</h3>
+                    <ul>
+                        <li>Adaptable to any environment</li>
+                        <li>Navigates best routes</li>
+                        <li>Takes on repetitive tasks</li>
+                        <li>Ensures safety standards</li>
+                        <li>Better long-term investment</li>
+                    </ul>
+                </div>
+                <div class="cons-box">
+                    <h3>✕ Challenges</h3>
+                    <ul>
+                        <li>Implementation requires more infrastructure</li>
+                        <li>Requires good WiFi and bandwidth (preferably 5G)</li>
+                        <li>Integration costs are high</li>
+                        <li>Moves slowly and needs charging</li>
+                        <li>Interoperability issues for customers</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges & Future -->
+        <section>
+            <span class="sec-label">07 / Future Directions</span>
+            <h2 class="sec-title">Challenges & Future Directions</h2>
+
+            <div class="challenge-box">
+                <h3>Current Challenges</h3>
+                <p>While AMR technology has advanced tremendously, establishing comprehensive safety regulations, improving computational power, designing intuitive human-robot interfaces, and reducing costs remain key focus areas for industry innovation.</p>
+            </div>
+
+            <div class="challenge-box" style="margin-top: 1.2rem;">
+                <h3>Looking Ahead</h3>
+                <p>The future of autonomous mobile robots will likely see increased integration with IoT systems, more sophisticated AI models, greater autonomy in complex and unpredictable environments, and expanded applications across industries.</p>
+            </div>
+
+            <div class="challenge-box" style="margin-top: 1.2rem;">
+                <h3>Emerging Capabilities and Applications</h3>
+                <ul class="emerging-list">
+                    <li><strong>AI and Machine Learning:</strong> Will enable greater autonomy and real-time decision making</li>
+                    <li><strong>Expanded Scope:</strong> Expansion beyond transportation and into monitoring, data collection, and decision support</li>
+                    <li><strong>Interconnectedness:</strong> Increased interconnectedness between robots and enterprise systems</li>
+                    <li><strong>Business Impact:</strong> Greater reliance by businesses to improve efficiency, accuracy, and flexibility</li>
+                </ul>
+                <div class="quote-box">
+                    "Advances in artificial intelligence and machine learning are powering the next generation of autonomous robots, which will enable them to quickly adapt to new, harsh conditions and make real-time decisions."
+                    <cite>— Konieczna Fuławka et al., 2025, p. 12</cite>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Video -->
+        <div class="video-wrap">
+            <h3>Learn More About the Robots</h3>
+            <p>Watch this engaging video to see autonomous mobile robots in action</p>
+            <a href="https://www.youtube.com/watch?v=m3WTPSxg8Hc" target="_blank" class="video-thumb-link">
+                <img src="https://img.youtube.com/vi/m3WTPSxg8Hc/maxresdefault.jpg" alt="Autonomous Mobile Robots Video">
+                <div class="play-btn">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+            </a>
+            <p class="video-caption">→ Click to watch on YouTube</p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Autonomous Mobile Robots Blog — All Rights Reserved</p>
+        <p>Part of BUS 237 Course Content</p>
+        <div class="footer-links">
+            <a href="#what-is">Overview</a>
+            <a href="#features">How It Works</a>
+            <a href="#applications">Applications</a>
+            <a href="Autonomous%20Mobile%20Robots.pdf">Download PDF</a>
+        </div>
+    </footer>
+
+</body>
+</html>
